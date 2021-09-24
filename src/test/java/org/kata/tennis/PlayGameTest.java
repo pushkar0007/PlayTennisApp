@@ -9,7 +9,10 @@ import org.kata.tennis.scoreboard.MatchScoreInformationImpl;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author pushkar
+ * PlayGameTest class is to test functionality of PlayGame
+ * */
 public class PlayGameTest extends TestMain {
     MatchScoreInformationImpl displayScoresImplSystemOut ;
 

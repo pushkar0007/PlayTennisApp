@@ -1,5 +1,8 @@
 package org.kata.tennis.model;
-
+/**
+ * @author pushkar
+ * Player Model
+ * */
 public class Player {
 	
 	private String username;

@@ -3,8 +3,11 @@ package org.kata.tennis.gameplay;
 import org.kata.tennis.constants.CommonConstants;
 import org.kata.tennis.model.Player;
 import org.kata.tennis.scoreboard.MatchScoreInformation;
-import org.kata.tennis.scoreboard.MatchScoreInformationImpl;
 
+/**
+ * @author pushkar
+ * Class to start the Game
+ * */
 public class PlayGame extends AbstractGame implements CommonConstants {
     public PlayGame(Player player1, Player player2) {
         this.player1 = player1;
@@ -24,7 +27,7 @@ public class PlayGame extends AbstractGame implements CommonConstants {
         gameScoreTextPlayer2 = "";
         winner = null;
     }
-    void play(MatchScoreInformation matchScoreInformation) {
+    public void play(MatchScoreInformation matchScoreInformation) {
         do {
 
             Player player = retrievePlayer(this);
