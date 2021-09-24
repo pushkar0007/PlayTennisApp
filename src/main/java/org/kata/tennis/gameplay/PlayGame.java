@@ -1,8 +1,11 @@
 package org.kata.tennis.gameplay;
 
+import org.kata.tennis.constants.CommonConstants;
 import org.kata.tennis.model.Player;
+import org.kata.tennis.scoreboard.MatchScoreInformation;
+import org.kata.tennis.scoreboard.MatchScoreInformationImpl;
 
-public class PlayGame {
+public class PlayGame implements CommonConstants {
     private Player player1;
     private Player player2;
 
@@ -22,5 +25,68 @@ public class PlayGame {
         gameScoreTextPlayer1 = "";
         gameScoreTextPlayer2 = "";
         winner = null;
+    }
+
+    public void incrementGameScorePlayer(Player player, MatchScoreInformation matchScoreInformation) {
+        boolean player1Scoring = player.equals(player1);
+        boolean player2Scoring = player.equals(player2);
+
+        // Game Score with {X<40} is ( X - 40 ) or ( 40 - X ) leading to score above 40
+        // => designate a winner
+        if ((gameScorePlayer1.equals(FORTY_SCORE) && gameScorePlayer2 < FORTY_SCORE && player1Scoring)
+                || (gameScorePlayer2.equals(FORTY_SCORE) && gameScorePlayer1 < FORTY_SCORE && player2Scoring)) {
+
+            designateWinner(player, matchScoreInformation);
+            // Game Score is ( 40 - 40 ) or above => activate deuce rule
+        }
+        else {
+            incrementGameScore(player, matchScoreInformation);
+        }
+    }
+
+    private void designateWinner(Player player, MatchScoreInformation matchScoreInformation) {
+        if (player1.equals(player)) {
+            matchScoreInformation.showGamePoint(player1);
+            winner = player1;
+        } else {
+            matchScoreInformation.showGamePoint(player2);
+            winner = player2;
+        }
+        resetGameScores();
+    }
+
+    private void resetGameScores() {
+        this.gameScorePlayer1=0;
+        this.gameScorePlayer2=0;
+    }
+
+    private Integer incrementGameScore(Player player, MatchScoreInformation matchScoreInformation) {
+        matchScoreInformation.showGamePoint(player);
+
+        if (player1.equals(player)) {
+            return gameScorePlayer1++;
+        } else {
+            return gameScorePlayer2++;
+        }
+    }
+
+    public void displayGameScore(MatchScoreInformation matchScoreInformation) {
+        if (winner == null) {
+            matchScoreInformation.showGameScore(getScoreDescription(gameScorePlayer1),
+                    getScoreDescription(gameScorePlayer2));
+        } else {
+            announceWinner(matchScoreInformation);
+        }
+    }
+
+    private String getScoreDescription(Integer gameScore) {
+        return pointsList.get(gameScore);
+    }
+    private void announceWinner(MatchScoreInformation matchScoreInformation) {
+        matchScoreInformation.showGameWinner(winner);
+    }
+
+    public Player getWinner() {
+        return winner;
     }
 }
