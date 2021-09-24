@@ -9,4 +9,9 @@ public interface CommonConstants {
     Integer ADVANTAGE_SCORE = 4;
     List<String> pointsList = Arrays.asList("0", "15", "30", "40", "ADV");
     Long SCORE_DELAY = 500L;
+    Integer TWO = 2;
+    Integer FOUR = 4;
+    Integer FIVE = 5;
+    Integer SIX = 6;
+    Integer SEVEN = 7;
 }

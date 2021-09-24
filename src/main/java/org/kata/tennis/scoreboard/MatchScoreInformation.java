@@ -11,5 +11,7 @@ public interface MatchScoreInformation {
 	void showMatchScore(Integer matchScorePlayer1, Integer matchScorePlayer2);
 	void showMatchWinner(Player player);
 	void announceDeuceRule();
-
+	void showSetScore(Integer setScorePlayer1, Integer setScorePlayer2);
+	void showTieBreakScore(Integer tieBreakScorePlayer1, Integer tieBreakScorePlayer2);
+	void showSetWinner(Player player);
 }

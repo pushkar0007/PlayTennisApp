@@ -15,79 +15,88 @@ public class PlayGameTest extends TestMain {
 
     PlayGame game ;
 
-    List<Player> testQuickestGameWinP1 ;
+    List<Player> listOfTurns ;
     @Before
     public void setup(){
         displayScoresImplSystemOut = new MatchScoreInformationImpl();
         game = new PlayGame(player1, player2);
-        testQuickestGameWinP1 = new ArrayList<>();
+        listOfTurns = new ArrayList<>();
     }
 
     @Test
     public void testWhenPlayer1WinsWith40Points() { 
         // Sought game result ( 40 - 0 )
-        testQuickestGameWinP1.add(player1); // ( 15 - 0 )
-        testQuickestGameWinP1.add(player1); // ( 30 - 0 )
-        testQuickestGameWinP1.add(player1); // ( 40 - 0 )
-        testQuickestGameWinP1.add(player1); // => Win
-
-        for (Player player : testQuickestGameWinP1) {
-            game.incrementGameScorePlayer(player, displayScoresImplSystemOut);
-            game.displayGameScore(displayScoresImplSystemOut);
-        }
-
+        listOfTurns.add(player1); // ( 15 - 0 )
+        listOfTurns.add(player1); // ( 30 - 0 )
+        listOfTurns.add(player1); // ( 40 - 0 )
+        listOfTurns.add(player1); // => Win
+        playGame();
         // Ensure Player1 wins the game
         assertEquals(player1, game.getWinner());
     }
 
     @Test
     public void testWhenPlayer2WinsWith40Points() {
-        testQuickestGameWinP1.add(player2); // ( 15 - 0 )
-        testQuickestGameWinP1.add(player2); // ( 30 - 0 )
-        testQuickestGameWinP1.add(player2); // ( 40 - 0 )
-        testQuickestGameWinP1.add(player2); // => Win
-
-        for (Player player : testQuickestGameWinP1) {
-            game.incrementGameScorePlayer(player, displayScoresImplSystemOut);
-            game.displayGameScore(displayScoresImplSystemOut);
-        }
-
-        // Ensure Player1 wins the game
+        listOfTurns.add(player2); // ( 15 - 0 )
+        listOfTurns.add(player2); // ( 30 - 0 )
+        listOfTurns.add(player2); // ( 40 - 0 )
+        listOfTurns.add(player2); // => Win
+        playGame();
+        // Ensure Player2 wins the game
         assertEquals(player2, game.getWinner());
     }
 
     @Test
     public void testHighestScorePlayerWins() { // Sought game result ( 40 - 0 )
-        testQuickestGameWinP1.add(player1); // ( 15 - 0 )
-        testQuickestGameWinP1.add(player1); // ( 30 - 0 )
-        testQuickestGameWinP1.add(player2); // ( 15 - 0 )
-        testQuickestGameWinP1.add(player2); // ( 30 - 0 )
-        testQuickestGameWinP1.add(player2); // ( 40 - 0 )
-        testQuickestGameWinP1.add(player2); // => Win
-        for (Player player : testQuickestGameWinP1) {
-            game.incrementGameScorePlayer(player, displayScoresImplSystemOut);
-            game.displayGameScore(displayScoresImplSystemOut);
-        }
-
-        // Ensure Player1 wins the game
+        listOfTurns.add(player1); // ( 15 - 0 )
+        listOfTurns.add(player1); // ( 30 - 0 )
+        listOfTurns.add(player2); // ( 15 - 0 )
+        listOfTurns.add(player2); // ( 30 - 0 )
+        listOfTurns.add(player2); // ( 40 - 0 )
+        listOfTurns.add(player2); // => Win
+        playGame();
+        // Ensure Player2 wins the game
         assertEquals(player2, game.getWinner());
     }
-    @Test
-    public void testDueceAndAdvPlayerWins() { // Sought game result ( 40 - 0 )
-        testQuickestGameWinP1.add(player1); // ( 15 - 0 )
-        testQuickestGameWinP1.add(player2); // ( 15 - 15 )
-        testQuickestGameWinP1.add(player1); // ( 30 - 15 )
-        testQuickestGameWinP1.add(player2); // ( 30 - 30 )
-        testQuickestGameWinP1.add(player1); // ( 40 - 30 )
-        testQuickestGameWinP1.add(player2); // ( 40 - 40 )
-        testQuickestGameWinP1.add(player1); // ( ADV - 40 )
-        testQuickestGameWinP1.add(player1); // => Player1 Wins
-        for (Player player : testQuickestGameWinP1) {
+
+    private void playGame() {
+        for (Player player : listOfTurns) {
             game.incrementGameScorePlayer(player, displayScoresImplSystemOut);
             game.displayGameScore(displayScoresImplSystemOut);
         }
+    }
 
+    @Test
+    public void testDueceAndAdvPlayerWins() { // Sought game result ( 40 - 0 )
+        listOfTurns.add(player1); // ( 15 - 0 )
+        listOfTurns.add(player2); // ( 15 - 15 )
+        listOfTurns.add(player1); // ( 30 - 15 )
+        listOfTurns.add(player2); // ( 30 - 30 )
+        listOfTurns.add(player1); // ( 40 - 30 )
+        listOfTurns.add(player2); // ( 40 - 40 )
+        listOfTurns.add(player1); // ( ADV - 40 )
+        listOfTurns.add(player1); // => Player1 Wins
+        playGame();
         // Ensure Player1 wins the game
         assertEquals(player1, game.getWinner());
+    }
+
+    @Test
+    public void testDoubleDueceAndAdvPlayerWins() { // Sought game result ( 40 - 0 )
+        listOfTurns.add(player1); // ( 15 - 0 )
+        listOfTurns.add(player2); // ( 15 - 15 )
+        listOfTurns.add(player1); // ( 30 - 15 )
+        listOfTurns.add(player2); // ( 30 - 30 )
+        listOfTurns.add(player1); // ( 40 - 30 )
+        listOfTurns.add(player2); // ( 40 - 40 )
+        listOfTurns.add(player2); // ( 40 - ADV )
+        listOfTurns.add(player1); // ( 40 - 40 )
+        listOfTurns.add(player2); // ( 40 - ADV )
+        listOfTurns.add(player1); // ( 40 - 40 )
+        listOfTurns.add(player2); // ( 40 - ADV )
+        listOfTurns.add(player2); // => Player2 Wins
+        playGame();
+        // Ensure Player2 wins the game
+        assertEquals(player2, game.getWinner());
     }
 }

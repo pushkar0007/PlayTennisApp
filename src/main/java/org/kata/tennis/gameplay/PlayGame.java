@@ -5,18 +5,7 @@ import org.kata.tennis.model.Player;
 import org.kata.tennis.scoreboard.MatchScoreInformation;
 import org.kata.tennis.scoreboard.MatchScoreInformationImpl;
 
-public class PlayGame implements CommonConstants {
-    private Player player1;
-    private Player player2;
-
-    private Integer gameScorePlayer1;
-    private Integer gameScorePlayer2;
-
-    private String gameScoreTextPlayer1;
-    private String gameScoreTextPlayer2;
-
-    private Player winner;
-
+public class PlayGame extends AbstractGame implements CommonConstants {
     public PlayGame(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
@@ -26,7 +15,28 @@ public class PlayGame implements CommonConstants {
         gameScoreTextPlayer2 = "";
         winner = null;
     }
+    public PlayGame(PlayGameSets set) {
+        player1 = set.getPlayer1();
+        player2 = set.getPlayer2();
+        gameScorePlayer1 = 0;
+        gameScorePlayer2 = 0;
+        gameScoreTextPlayer1 = "";
+        gameScoreTextPlayer2 = "";
+        winner = null;
+    }
+    void play(MatchScoreInformation matchScoreInformation) {
+        do {
 
+            Player player = retrievePlayer(this);
+            incrementGameScorePlayer(player, matchScoreInformation);
+            displayGameScore(matchScoreInformation);
+            try {
+                Thread.sleep(SCORE_DELAY);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } while (winner == null);
+    }
     public void incrementGameScorePlayer(Player player, MatchScoreInformation matchScoreInformation) {
         boolean player1Scoring = player.equals(player1);
         boolean player2Scoring = player.equals(player2);
@@ -116,14 +126,9 @@ public class PlayGame implements CommonConstants {
         }
     }
 
-    private String getScoreDescription(Integer gameScore) {
-        return pointsList.get(gameScore);
-    }
-    private void announceWinner(MatchScoreInformation matchScoreInformation) {
-        matchScoreInformation.showGameWinner(winner);
+    private Player retrievePlayer(PlayGame game) {
+        return (Math.random() < 0.5) ? game.getPlayer1() : game.getPlayer2();
     }
 
-    public Player getWinner() {
-        return winner;
-    }
+
 }

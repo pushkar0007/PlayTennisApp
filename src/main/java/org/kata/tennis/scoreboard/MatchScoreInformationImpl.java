@@ -46,5 +46,18 @@ public class MatchScoreInformationImpl implements MatchScoreInformation{
     public void announceDeuceRule() {
         System.out.println("Deuce Rule applied!");
     }
+    @Override
+    public void showSetScore(Integer setScorePlayer1, Integer setScorePlayer2) {
+        System.out.println("Current Tie Break Score is: ( " + setScorePlayer1 + " - " + setScorePlayer2 + " )\n\n");
+    }
 
+    @Override
+    public void showTieBreakScore(Integer tieBreakScorePlayer1, Integer tieBreakScorePlayer2) {
+        System.out.println("Current Tie Break Score is: ( " + tieBreakScorePlayer1 + " - " + tieBreakScorePlayer2 + " )\n\n");
+    }
+
+    @Override
+    public void showSetWinner(Player player) {
+        System.out.println("The winner of the Set is : " + player.getUsername() + "\n\n");
+    }
 }
