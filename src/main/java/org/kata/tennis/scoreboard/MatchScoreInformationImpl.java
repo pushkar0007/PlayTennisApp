@@ -42,5 +42,9 @@ public class MatchScoreInformationImpl implements MatchScoreInformation{
         System.out.println("Game end");
     }
 
+    @Override
+    public void announceDeuceRule() {
+        System.out.println("Deuce Rule applied!");
+    }
 
 }

@@ -38,10 +38,47 @@ public class PlayGame implements CommonConstants {
 
             designateWinner(player, matchScoreInformation);
             // Game Score is ( 40 - 40 ) or above => activate deuce rule
+        }else if (gameScorePlayer1 >= FORTY_SCORE && gameScorePlayer2 >= FORTY_SCORE) {
+            activateDeuceRule(player, matchScoreInformation);
+            // All other cases => increment scores
         }
         else {
             incrementGameScore(player, matchScoreInformation);
         }
+    }
+
+    private void activateDeuceRule(Player player, MatchScoreInformation matchScoreInformation) {
+        boolean player1Scoring = player.equals(player1);
+        boolean player2Scoring = player.equals(player2);
+
+        // Game Score is ( 40 - 40 ) => increment score to ADV
+        if (gameScorePlayer1.equals(FORTY_SCORE) && gameScorePlayer2.equals(FORTY_SCORE)) {
+
+            incrementGameScore(player, matchScoreInformation);
+
+            // Game Score is ( ADV - 40 ) or ( 40 - ADV ) leading to score above ADV =>
+            // designate a winner
+        } else if ((gameScorePlayer1.equals(ADVANTAGE_SCORE) && gameScorePlayer2.equals(FORTY_SCORE) && player1Scoring)
+                || (gameScorePlayer2.equals(ADVANTAGE_SCORE) && gameScorePlayer1.equals(FORTY_SCORE)
+                && player2Scoring)) {
+
+            designateWinner(player, matchScoreInformation);
+
+            // Game Score is ( ADV - 40 ) or ( 40 - ADV ) leading to score ( ADV - ADV ) =>
+            // increment scores & activate deuce rule
+        } else if ((gameScorePlayer1.equals(FORTY_SCORE) && gameScorePlayer2.equals(ADVANTAGE_SCORE) && player1Scoring)
+                || (gameScorePlayer2.equals(FORTY_SCORE) && gameScorePlayer1.equals(ADVANTAGE_SCORE)
+                && player2Scoring)) {
+
+            incrementGameScore(player, matchScoreInformation);
+            resetScoresDeuceRule(matchScoreInformation);
+        }
+    }
+
+    private void resetScoresDeuceRule(MatchScoreInformation matchScoreInformation) {
+        matchScoreInformation.announceDeuceRule();
+        this.gameScorePlayer1 = FORTY_SCORE;
+        this.gameScorePlayer2 = FORTY_SCORE;
     }
 
     private void designateWinner(Player player, MatchScoreInformation matchScoreInformation) {

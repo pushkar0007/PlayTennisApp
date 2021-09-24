@@ -10,4 +10,6 @@ public interface MatchScoreInformation {
 	void showGameWinner(Player player);
 	void showMatchScore(Integer matchScorePlayer1, Integer matchScorePlayer2);
 	void showMatchWinner(Player player);
+	void announceDeuceRule();
+
 }
