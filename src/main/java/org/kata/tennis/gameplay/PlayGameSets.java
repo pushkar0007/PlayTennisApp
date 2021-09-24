@@ -2,7 +2,10 @@ package org.kata.tennis.gameplay;
 
 import org.kata.tennis.model.Player;
 import org.kata.tennis.scoreboard.MatchScoreInformation;
-
+/**
+ * @author pushkar
+ * Class to start the Sets in Game
+ * */
 public class PlayGameSets extends AbstractGame{
     private Player player1;
     private Player player2;

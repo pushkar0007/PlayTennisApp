@@ -1,7 +1,10 @@
 package org.kata.tennis.scoreboard;
 
 import org.kata.tennis.model.Player;
-
+/**
+ * @author pushkar
+ * Abstract Ganme class
+ * */
 public interface MatchScoreInformation {
 	void showOpeningBanner();
 	void showClosingBanner();

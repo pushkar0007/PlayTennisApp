@@ -2,7 +2,10 @@ package org.kata.tennis.constants;
 
 import java.util.Arrays;
 import java.util.List;
-
+/**
+ * @author pushkar
+ * Constant Interface
+ * */
 public interface CommonConstants {
     Integer THIRTY_SCORE = 2;
     Integer FORTY_SCORE = 3;

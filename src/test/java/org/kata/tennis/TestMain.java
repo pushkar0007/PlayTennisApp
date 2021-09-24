@@ -1,7 +1,10 @@
 package org.kata.tennis;
 
 import org.kata.tennis.model.Player;
-
+/**
+ * @author pushkar
+ * TestMain class is base test class
+ * */
 public class TestMain {
     public String PLAYER_1 = "player1";
     public String PLAYER_2 = "player2";

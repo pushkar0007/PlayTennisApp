@@ -3,7 +3,10 @@ package org.kata.tennis.gameplay;
 import org.kata.tennis.constants.CommonConstants;
 import org.kata.tennis.model.Player;
 import org.kata.tennis.scoreboard.MatchScoreInformation;
-
+/**
+ * @author pushkar
+ * Abstract Game class
+ * */
 public class AbstractGame implements CommonConstants {
     protected Player player1;
     protected Player player2;

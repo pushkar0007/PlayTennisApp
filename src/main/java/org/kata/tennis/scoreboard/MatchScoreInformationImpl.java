@@ -1,7 +1,10 @@
 package org.kata.tennis.scoreboard;
 
 import org.kata.tennis.model.Player;
-
+/**
+ * @author pushkar
+ * MatchScoreInformationImpl class is to show the match related information
+ * */
 public class MatchScoreInformationImpl implements MatchScoreInformation{
     @Override
     public void showGamePoint(Player player) {
